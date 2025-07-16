@@ -4,19 +4,21 @@ import com.sprint.mission.discodeit.entity.Channel;
 import com.sprint.mission.discodeit.entity.Message;
 import com.sprint.mission.discodeit.entity.User;
 import com.sprint.mission.discodeit.entity.UserStatus;
+import com.sprint.mission.discodeit.service.ChannelService;
+import com.sprint.mission.discodeit.service.MessageService;
+import com.sprint.mission.discodeit.service.UserService;
 import com.sprint.mission.discodeit.service.jcf.JCFChannelService;
 import com.sprint.mission.discodeit.service.jcf.JCFMessageService;
 import com.sprint.mission.discodeit.service.jcf.JCFUserService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
 
-        JCFUserService jcfUs = new JCFUserService();
-
+//        UserService jcfUs = new JCFUserService();
+        UserService jcfUs = JCFUserService.getInstance();
         //[ ] 등록
         User user1 = jcfUs.create("user1","1234", UserStatus.ONLINE);
         User user2 = jcfUs.create("user2","1234",UserStatus.ONLINE);
@@ -59,7 +61,7 @@ public class Main {
 
 
         // channel //////////////////////////////////////
-        JCFChannelService jcfCn = new JCFChannelService();
+        ChannelService jcfCn = JCFChannelService.getInstance();
         //생성
         Channel channel1 = jcfCn.create("channel1","test1","1234");
         Channel channel2 = jcfCn.create("channel2","test2","1234");
@@ -101,7 +103,7 @@ public class Main {
         channel.stream().sorted().forEach(System.out::println);
 
         //  /////////Message//////////////
-        JCFMessageService jcfMs = new JCFMessageService();
+        MessageService jcfMs = JCFMessageService.getInstance();
         Message message1 = jcfMs.create(channel1.getId(),user1.getId(),"Hello");
         Message message2 = jcfMs.create(channel1.getId(),user1.getId(),"My Name is");
         Message message3 = jcfMs.create(channel1.getId(),user1.getId(),"ChanGyu");
@@ -114,7 +116,7 @@ public class Main {
         Message message10 = jcfMs.create(channel3.getId(),user2.getId(),"Hi3");
 
         //조회(단건)
-        System.out.println("메세지 조회(다건)");
+        System.out.println("메세지 조회(단건)");
         Message msg = jcfMs.find(message1.getId());
         System.out.println(msg.toString());
         //조회(전체)

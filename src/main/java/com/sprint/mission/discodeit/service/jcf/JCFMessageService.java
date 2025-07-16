@@ -2,14 +2,16 @@ package com.sprint.mission.discodeit.service.jcf;
 
 import com.sprint.mission.discodeit.entity.Message;
 import com.sprint.mission.discodeit.service.MessageService;
+import com.sprint.mission.discodeit.service.UserService;
 
 import java.util.*;
 
 public class JCFMessageService implements MessageService {
 
     private final Map<UUID, Message> messages;
+    private final static MessageService jcfMs = new JCFMessageService();
 
-    public JCFMessageService() {
+    private JCFMessageService() {
         messages = new HashMap<>();
     }
 
@@ -47,5 +49,9 @@ public class JCFMessageService implements MessageService {
         }
 
         return false;
+    }
+
+    public static MessageService getInstance(){
+        return jcfMs;
     }
 }

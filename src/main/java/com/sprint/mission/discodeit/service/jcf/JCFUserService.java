@@ -9,8 +9,9 @@ import java.util.*;
 public class JCFUserService implements UserService {
 
     private final Map<UUID, User> users;
+    private final static UserService jcfUs = new JCFUserService();
 
-    public JCFUserService() {
+    private JCFUserService() {
         this.users = new HashMap<>();
     }
 
@@ -57,5 +58,9 @@ public class JCFUserService implements UserService {
             }
         }
         return false;
+    }
+
+    public static UserService getInstance(){
+        return jcfUs;
     }
 }
