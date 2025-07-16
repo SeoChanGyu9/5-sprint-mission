@@ -7,7 +7,7 @@ import java.util.*;
 
 public class JCFChannelService implements ChannelService {
 
-    private final Map<String, Channel> channels;
+    private final Map<UUID, Channel> channels;
 
     public JCFChannelService() {
         this.channels = new HashMap<>();
@@ -22,7 +22,7 @@ public class JCFChannelService implements ChannelService {
     @Override
     public List<Channel> find(String channelName) {
         List<Channel> findChannels = new ArrayList<>();
-        for (Map.Entry<String, Channel> entry : channels.entrySet()) {
+        for (Map.Entry<UUID, Channel> entry : channels.entrySet()) {
             if (entry.getKey().equals(channelName)) {
                 findChannels.add(entry.getValue());
             }

@@ -114,7 +114,7 @@ public class Main {
         Message message10 = jcfMs.create(channel3.getId(),user2.getId(),"Hi3");
 
         //조회(단건)
-        System.out.println("메세지 조회(다건)");
+        System.out.println("메세지 조회(단건)");
         Message msg = jcfMs.find(message1.getId());
         System.out.println(msg.toString());
         //조회(전체)
