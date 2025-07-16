@@ -4,19 +4,17 @@ import java.util.UUID;
 
 public class User implements Comparable<User>{
     private UUID id;
-    private long createdAt;
-    private long updatedAt;
+    private Long createdAt; //Long은 null이 존재할수있음
+    private Long updatedAt;
 
-    private String userId;
     private String username;
     private String password;
     private UserStatus status;
 
-    public User(String userId, String username, String password, UserStatus status) {
+    public User(String username, String password, UserStatus status) {
         this.id = UUID.randomUUID();
         this.createdAt = System.currentTimeMillis();
 
-        this.userId = userId;
         this.username = username;
         this.password = password;
         this.status = status;
@@ -24,7 +22,7 @@ public class User implements Comparable<User>{
 
     @Override
     public int compareTo(User o) {
-        return userId.compareTo(o.userId);
+        return username.compareTo(o.username);
     }
 
     public UUID getId() {
@@ -47,10 +45,6 @@ public class User implements Comparable<User>{
         return password;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
     public UserStatus getStatus() {
         return status;
     }
@@ -61,7 +55,6 @@ public class User implements Comparable<User>{
         sb.append("id=").append(id);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", userId='").append(userId).append('\'');
         sb.append(", username='").append(username).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", status='").append(status).append('\'');

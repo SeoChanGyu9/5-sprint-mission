@@ -4,18 +4,18 @@ import java.util.UUID;
 
 public class Message implements Comparable<Message>{
     private UUID id;
-    private long createdAt;
-    private long updatedAt;
+    private Long createdAt;
+    private Long updatedAt;
 
-    private String channelName;
-    private String fromId;
+    private UUID channelId;
+    private UUID fromId;
     private String content;
 
-    public Message(String channelName, String fromId, String content) {
+    public Message(UUID channelId, UUID fromId, String content) {
         this.id = UUID.randomUUID();
         this.createdAt = System.currentTimeMillis();
 
-        this.channelName = channelName;
+        this.channelId = channelId;
         this.fromId = fromId;
         this.content = content;
         //Date currentDate = new Date(createdAt);
@@ -38,11 +38,11 @@ public class Message implements Comparable<Message>{
         return updatedAt;
     }
 
-    public String getChannelName() {
-        return channelName;
+    public UUID getChannelId() {
+        return channelId;
     }
 
-    public String getFromId() {
+    public UUID getFromId() {
         return fromId;
     }
 
@@ -56,7 +56,7 @@ public class Message implements Comparable<Message>{
         sb.append("id=").append(id);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", channelId='").append(channelName).append('\'');
+        sb.append(", channelId='").append(channelId).append('\'');
         sb.append(", fromId='").append(fromId).append('\'');
         sb.append(", content='").append(content).append('\'');
         sb.append('}');

@@ -5,8 +5,8 @@ import java.util.UUID;
 
 public class Channel implements Comparable<Channel>{
     private UUID id;
-    private long createdAt;
-    private long updatedAt;
+    private Long createdAt;
+    private Long updatedAt;
 
     private String channelName;
     private String creatorId;
@@ -58,8 +58,9 @@ public class Channel implements Comparable<Channel>{
         return sb.toString();
     }
 
-    public void update(String password) {
+    public void update(String channelName, String password) {
         this.updatedAt = System.currentTimeMillis();
+        this.channelName = channelName;
         this.password = password;
     }
 

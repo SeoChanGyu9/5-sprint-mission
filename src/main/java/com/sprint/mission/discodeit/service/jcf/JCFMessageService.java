@@ -14,22 +14,15 @@ public class JCFMessageService implements MessageService {
     }
 
     @Override
-    public void create(String channelName, String fromId, String content) {
-        Message newMessage = new Message(channelName,  fromId, content);
+    public Message create(UUID channelId, UUID fromId, String content) {
+        Message newMessage = new Message(channelId,  fromId, content);
         messages.put(newMessage.getId(), newMessage);
+        return newMessage;
     }
 
     @Override
-    public List<Message> find(String channelName, String fromId) {
-        List<Message> findMessage = new ArrayList<>();
-        for (Map.Entry<UUID, Message> entry : messages.entrySet()) {
-            if(entry.getValue().getChannelName().equals(channelName)) {
-                if(entry.getValue().getFromId().equals(fromId)) {
-                    findMessage.add(entry.getValue());
-                }
-            }
-        }
-        return findMessage;
+    public Message find(UUID messageId) {
+        return messages.get(messageId);
     }
 
     @Override

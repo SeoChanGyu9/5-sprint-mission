@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MessageService {
-    void create(String channelName, String fromId, String content);
-    List<Message> find(String channelName, String fromId);
+    Message create(UUID channelId, UUID fromId, String content);
+    Message find(UUID messageId);
     List<Message> findAll();
     boolean update(UUID id, String content);
     boolean delete(UUID id);

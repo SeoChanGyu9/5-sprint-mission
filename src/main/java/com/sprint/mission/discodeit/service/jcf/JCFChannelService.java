@@ -3,10 +3,7 @@ package com.sprint.mission.discodeit.service.jcf;
 import com.sprint.mission.discodeit.entity.Channel;
 import com.sprint.mission.discodeit.service.ChannelService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JCFChannelService implements ChannelService {
 
@@ -16,9 +13,10 @@ public class JCFChannelService implements ChannelService {
         this.channels = new HashMap<>();
     }
     @Override
-    public void create(String channelName, String creatorId, String password) {
+    public Channel create(String channelName, String creatorId, String password) {
         Channel newChannel = new Channel(channelName, creatorId, password);
-        channels.put(channelName, newChannel);
+        channels.put(newChannel.getId(), newChannel);
+        return newChannel;
     }
 
     @Override
@@ -39,10 +37,10 @@ public class JCFChannelService implements ChannelService {
     }
 
     @Override
-    public boolean update(String channelName, String odPw, String nwPw) {
-        if(channels.containsKey(channelName)) {
-            if(channels.get(channelName).getPassword().equals(odPw)) {
-                channels.get(channelName).update(nwPw);
+    public boolean update(UUID channelId, String channelName, String odPw, String nwPw) {
+        if(channels.containsKey(channelId)) {
+            if(channels.get(channelId).getPassword().equals(odPw)) {
+                channels.get(channelId).update(channelName, nwPw);
                 return true;
             }
         }
@@ -51,10 +49,10 @@ public class JCFChannelService implements ChannelService {
     }
 
     @Override
-    public boolean delete(String channelName, String creatorId, String password) {
-        if(channels.containsKey(channelName)) {
-            if(channels.get(channelName).getPassword().equals(password)) {
-                channels.remove(channelName);
+    public boolean delete(UUID channelId, String creatorId, String password) {
+        if(channels.containsKey(channelId)) {
+            if(channels.get(channelId).getPassword().equals(password)) {
+                channels.remove(channelId);
                 return true;
             }
         }
