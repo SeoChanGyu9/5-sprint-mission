@@ -52,15 +52,14 @@ public class Message implements Comparable<Message>{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Message{");
-        sb.append("id=").append(id);
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", channelId='").append(channelId).append('\'');
-        sb.append(", fromId='").append(fromId).append('\'');
-        sb.append(", content='").append(content).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Message{" +
+                "id=" + id +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", channelId=" + channelId +
+                ", fromId=" + fromId +
+                ", content='" + content + '\'' +
+                '}';
     }
 
     @Override

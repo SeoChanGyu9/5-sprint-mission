@@ -1,5 +1,6 @@
 package com.sprint.mission.discodeit.entity;
 
+import java.util.StringJoiner;
 import java.util.UUID;
 
 public class User implements Comparable<User>{
@@ -51,18 +52,16 @@ public class User implements Comparable<User>{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("User{");
-        sb.append("id=").append(id);
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", username='").append(username).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", status='").append(status).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "User{" +
+                "id=" + id +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                '}';
     }
-
-    //update
+//update
 
     public void update(String username, String password, UserStatus status) {
         this.updatedAt = System.currentTimeMillis();

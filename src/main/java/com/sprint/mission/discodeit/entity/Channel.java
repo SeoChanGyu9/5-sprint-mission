@@ -1,6 +1,5 @@
 package com.sprint.mission.discodeit.entity;
 
-import java.util.List;
 import java.util.UUID;
 
 public class Channel implements Comparable<Channel>{
@@ -47,15 +46,14 @@ public class Channel implements Comparable<Channel>{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Channel{");
-        sb.append("id=").append(id);
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", channelName='").append(channelName).append('\'');
-        sb.append(", creatorId='").append(creatorId).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Channel{" +
+                "id=" + id +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", channelName='" + channelName + '\'' +
+                ", creatorId='" + creatorId + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     public void update(String channelName, String password) {
