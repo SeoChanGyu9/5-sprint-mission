@@ -1,24 +1,27 @@
 package com.sprint.mission.discodeit.entity;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Message implements Comparable<Message>{
-    private UUID id;
-    private Long createdAt;
+public class Message implements Comparable<Message>, Serializable {
+    private final UUID id;
+    private final Long createdAt;
     private Long updatedAt;
 
     private UUID channelId;
-    private UUID fromId;
+    private UUID fromUserId;
     private String content;
 
-    public Message(UUID channelId, UUID fromId, String content) {
-        this.id = UUID.randomUUID();
-        this.createdAt = System.currentTimeMillis();
-
+    public Message(UUID id, Long createdAt, UUID channelId, UUID fromUserId, String content) {
+        this.id = id;
+        this.createdAt = createdAt;
         this.channelId = channelId;
-        this.fromId = fromId;
+        this.fromUserId = fromUserId;
         this.content = content;
-        //Date currentDate = new Date(createdAt);
+    }
+
+    public Message(UUID channelId, UUID fromUserId, String content) {
+        this(UUID.randomUUID(), System.currentTimeMillis(), channelId, fromUserId, content);
     }
 
     public void update(String content) {
@@ -42,8 +45,8 @@ public class Message implements Comparable<Message>{
         return channelId;
     }
 
-    public UUID getFromId() {
-        return fromId;
+    public UUID getFromUserId() {
+        return fromUserId;
     }
 
     public String getContent() {
@@ -57,7 +60,7 @@ public class Message implements Comparable<Message>{
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", channelId=" + channelId +
-                ", fromId=" + fromId +
+                ", fromUserId=" + fromUserId +
                 ", content='" + content + '\'' +
                 '}';
     }
