@@ -10,9 +10,10 @@ import java.util.UUID;
 // 기능을 인터페이스로 선언하세요.
 public interface UserService {
     User create(String username, String password, UserStatus status);
-    List<User> find(String username);
+    User find(UUID id);
     List<User> findAll();
     boolean update(UUID userId, String username, String odPwd, String nwPwd, UserStatus status);
     boolean delete(UUID userId, String password);
-
+    boolean existsById(UUID id);
+    long count();
 }

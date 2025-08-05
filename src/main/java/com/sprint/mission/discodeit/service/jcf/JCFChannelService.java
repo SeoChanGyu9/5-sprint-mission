@@ -1,8 +1,8 @@
 package com.sprint.mission.discodeit.service.jcf;
 
 import com.sprint.mission.discodeit.entity.Channel;
+import com.sprint.mission.discodeit.entity.ChannelStatus;
 import com.sprint.mission.discodeit.service.ChannelService;
-import com.sprint.mission.discodeit.service.UserService;
 
 import java.util.*;
 
@@ -16,39 +16,44 @@ public class JCFChannelService implements ChannelService {
         this.channels = new HashMap<>();
     }
     @Override
-    public Channel create(String channelName, String creatorId, String password) {
-        Channel newChannel = new Channel(channelName, creatorId, password);
+    public Channel create(String channelName, String creatorId, String password, ChannelStatus status) {
+        Channel newChannel = new Channel(channelName, creatorId, password, status);
         channels.put(newChannel.getId(), newChannel);
         return newChannel;
     }
 
     @Override
-    public List<Channel> find(String channelName) {
-        List<Channel> findChannels = new ArrayList<>();
-        for (Map.Entry<UUID, Channel> entry : channels.entrySet()) {
-            if (entry.getKey().equals(channelName)) {
-                findChannels.add(entry.getValue());
-            }
+    public Channel find(UUID channelId) {
+        Channel findChannel=null;
+//        for (Map.Entry<UUID, Channel> entry : channels.entrySet()) {
+//            if (entry.getKey().equals(channelName)) {
+//                findChannels.add(entry.getValue());
+//            }
+//        }
+        if(channels.containsKey(channelId)){
+            findChannel = channels.get(channelId);
         }
 
-        return findChannels;
+        return findChannel;
     }
 
     @Override
     public List<Channel> findAll() {
-        return new ArrayList<>(channels.values());
+        return List.copyOf(channels.values());
     }
 
     @Override
-    public boolean update(UUID channelId, String channelName, String odPw, String nwPw) {
+    public boolean update(UUID channelId, String channelName, String odPw, String nwPw, ChannelStatus status) {
         if(channels.containsKey(channelId)) {
             if(channels.get(channelId).getPassword().equals(odPw)) {
-                channels.get(channelId).update(channelName, nwPw);
+                channels.get(channelId).update(channelName, nwPw, status);
                 return true;
+            }else{
+                throw new IllegalArgumentException("Incorrect password");
             }
+        }else {
+            throw new IllegalArgumentException("ChannelID: " + channelId + " not found.");
         }
-
-        return false;
     }
 
     @Override
@@ -65,5 +70,15 @@ public class JCFChannelService implements ChannelService {
 
     public static ChannelService getInstance(){
         return jcfCs;
+    }
+
+    @Override
+    public boolean existsById(UUID channelId) {
+        return false;
+    }
+
+    @Override
+    public long count() {
+        return 0;
     }
 }

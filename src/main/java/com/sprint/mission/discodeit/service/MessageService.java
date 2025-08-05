@@ -11,5 +11,7 @@ public interface MessageService {
     List<Message> findAll();
     boolean update(UUID id, String content);
     boolean delete(UUID id);
+    boolean existsById(UUID id);
+    long count();
 
 }

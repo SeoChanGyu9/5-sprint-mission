@@ -23,19 +23,16 @@ public class JCFUserService implements UserService {
     }
 
     @Override
-    public List<User> find(String username) {
-        List<User> searchedUser = new ArrayList<>();
-        for(Map.Entry<UUID, User> entry : users.entrySet()) {
-            if(entry.getValue().getUsername().contains(username)) {
-                searchedUser.add(entry.getValue());
-            }
+    public User find(UUID id) {
+        if(users.containsKey(id)){
+            return users.get(id);
         }
-        return searchedUser;
+        return null;
     }
 
     @Override
     public List<User> findAll() {
-        return new ArrayList<>(users.values());
+        return List.copyOf(users.values());
     }
 
     @Override
@@ -62,5 +59,15 @@ public class JCFUserService implements UserService {
 
     public static UserService getInstance(){
         return jcfUs;
+    }
+
+    @Override
+    public boolean existsById(UUID id) {
+        return users.containsKey(id);
+    }
+
+    @Override
+    public long count() {
+        return users.size();
     }
 }

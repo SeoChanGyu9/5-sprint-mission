@@ -1,21 +1,23 @@
 package com.sprint.mission.discodeit.entity;
 
-import java.util.StringJoiner;
+import java.io.Serializable;
 import java.util.UUID;
 
-public class User implements Comparable<User>{
-    private UUID id;
-    private Long createdAt; //Long은 null이 존재할수있음
+public class User implements Comparable<User>, Serializable {
+    private final UUID id;
+    private final Long createdAt; //Long은 null이 존재할수있음
     private Long updatedAt;
 
     private String username;
     private String password;
-    private UserStatus status;
+    private UserStatus status;  //ONLINE, OFFLINE, IDLE, DO_NOT_DISTURB
 
     public User(String username, String password, UserStatus status) {
-        this.id = UUID.randomUUID();
-        this.createdAt = System.currentTimeMillis();
-
+        this(UUID.randomUUID(), System.currentTimeMillis(), username, password, status);
+    }
+    public User(UUID id, Long createdAt, String username, String password, UserStatus status) {
+        this.id = id;
+        this.createdAt = createdAt;
         this.username = username;
         this.password = password;
         this.status = status;

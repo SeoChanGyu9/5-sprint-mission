@@ -1,23 +1,29 @@
 package com.sprint.mission.discodeit.entity;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Channel implements Comparable<Channel>{
-    private UUID id;
-    private Long createdAt;
+public class Channel implements Comparable<Channel>, Serializable {
+    private final UUID id;
+    private final Long createdAt;
     private Long updatedAt;
 
     private String channelName;
     private String creatorId;
     private String password;
+    private ChannelStatus status; //PUBLIC, PRIVATE
 
-    public Channel(String channelName, String creatorId, String password) {
-        this.id = UUID.randomUUID();
-        this.createdAt = System.currentTimeMillis();
-
+    public Channel(UUID id, Long createdAt, String channelName, String creatorId, String password, ChannelStatus status) {
+        this.id = id;
+        this.createdAt = createdAt;
         this.channelName = channelName;
         this.creatorId = creatorId;
         this.password = password;
+        this.status = status;
+    }
+
+    public Channel(String channelName, String creatorId, String password, ChannelStatus status) {
+        this(UUID.randomUUID(), System.currentTimeMillis(), channelName, creatorId, password, status);
     }
 
     public UUID getId() {
@@ -44,6 +50,10 @@ public class Channel implements Comparable<Channel>{
         return password;
     }
 
+    public ChannelStatus getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
         return "Channel{" +
@@ -53,13 +63,15 @@ public class Channel implements Comparable<Channel>{
                 ", channelName='" + channelName + '\'' +
                 ", creatorId='" + creatorId + '\'' +
                 ", password='" + password + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 
-    public void update(String channelName, String password) {
+    public void update(String channelName, String password, ChannelStatus status) {
         this.updatedAt = System.currentTimeMillis();
         this.channelName = channelName;
         this.password = password;
+        this.status = status;
     }
 
     @Override
