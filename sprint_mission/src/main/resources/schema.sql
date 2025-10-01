@@ -1,5 +1,3 @@
-DROP TABLE users;
-
 -- 테이블
 -- User
 CREATE TABLE users
